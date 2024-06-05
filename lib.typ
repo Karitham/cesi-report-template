@@ -19,7 +19,7 @@
   body,
 ) = {
   // Set the document's basic properties.
-  set document(author: authors, title: title)
+  set document(author: authors.map(it => it.name), title: title)
   set page(
     numbering: "1",
     number-align: center,
@@ -113,7 +113,8 @@
             #linebreak()
           ]
           #for author in authors {
-            [#author #linebreak()]
+            link(author.link, author.name)
+            linebreak()
           }
         ]
       }
