@@ -47,7 +47,11 @@
     lang = "fr"
   }
 
-  set text(font: "Linux Libertine", lang: lang, size: 13pt)
+  set text(
+    font: ("DejaVu Serif", "arial", "Linux Libertine"),
+    lang: lang,
+    size: 12pt,
+  )
   set heading(numbering: "1.1")
 
   show heading: it => {
