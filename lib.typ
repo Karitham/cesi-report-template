@@ -15,6 +15,7 @@
   table-of-tables: false,
   table-of-figures: false,
   table-of-contents: true,
+  blank-page: true,
   footer-text: "CESI",
   body,
 ) = {
@@ -26,7 +27,12 @@
     footer: locate(loc => {
       // Omit page number on the first page
       let page-number = counter(page).at(loc).at(0)
-      if page-number > 1 {
+      // No footer on first and second page.
+      let no-footer = 1
+      if blank-page {
+        no-footer += 1
+      }
+      if page-number > no-footer {
         line(length: 100%, stroke: 0.5pt)
         v(-2pt)
         text(
@@ -166,21 +172,23 @@
     }
   ]
 
-  pagebreak()
+  if blank-page {
+    pagebreak()
+  }
 
   if table-of-contents {
-    outline(depth: 3, indent: true)
     pagebreak()
+    outline(depth: 3, indent: true)
   }
 
   if table-of-figures {
-    outline(title: dict.figures_table, target: figure.where(kind: image))
     pagebreak()
+    outline(title: dict.figures_table, target: figure.where(kind: image))
   }
 
   if table-of-tables {
-    outline(title: dict.tables_table, target: figure.where(kind: table))
     pagebreak()
+    outline(title: dict.tables_table, target: figure.where(kind: table))
   }
 
   body
