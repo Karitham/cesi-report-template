@@ -29,12 +29,15 @@
       if page-number > 1 {
         line(length: 100%, stroke: 0.5pt)
         v(-2pt)
-        text(size: 12pt, weight: "regular")[
-          #footer-text
-          #h(1fr)
-          #page-number
-          #h(1fr)
-          #academic-year
+        text(
+          size: 12pt,
+          weight: "regular",
+        )[
+          #grid(
+            columns: (1fr, 1fr, 1fr),
+            align: center,
+            [#footer-text], [#page-number], [#academic-year],
+          )
         ]
       }
     }),
