@@ -59,7 +59,7 @@
   set text(
     font: ("DejaVu Serif", "arial", "Linux Libertine"),
     lang: lang,
-    size: 13pt,
+    size: 12pt,
   )
   set heading(numbering: "1.1")
 
