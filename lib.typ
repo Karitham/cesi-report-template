@@ -6,9 +6,9 @@
   subtitle: none,
   school-logo: none,
   company-logo: none,
-  authors: (),
-  mentors: (),
-  jury: (),
+  authors: ((link: none, name: none),),
+  mentors: ((link: none, name: none),),
+  jury: ((link: none, name: none),),
   branch: none,
   academic-year: none,
   french: false,
@@ -63,6 +63,15 @@
   )
   set heading(numbering: "1.1")
 
+  let format_link = body => underline(
+    offset: 2pt,
+    stroke: 1.5pt + rgb("#fbe216"),
+    body,
+  )
+
+  show link: it => format_link(it)
+  show ref: it => format_link(it)
+
   show heading: it => {
     if it.level == 1 and it.numbering != none {
       pagebreak()
@@ -86,7 +95,7 @@
     #box(height: IMAGE_BOX_MAX_HEIGHT, width: IMAGE_BOX_MAX_WIDTH)[
       #align(right + horizon)[
         #if school-logo == none {
-          image("images/ENSIAS.svg")
+          image("images/CESI.svg")
         } else {
           school-logo
         }
@@ -126,7 +135,11 @@
             #linebreak()
           ]
           #for author in authors {
-            link(author.link, author.name)
+            if author.link != none {
+              link(author.link, author.name)
+            } else {
+              author.name
+            }
             linebreak()
           }
         ]
@@ -144,7 +157,12 @@
             #linebreak()
           ]
           #for mentor in mentors {
-            mentor
+            if mentor.link != none {
+              link(mentor.link, mentor.name)
+            } else {
+              mentor.name
+            }
+
             linebreak()
           }
         ]
@@ -154,7 +172,13 @@
         align(right)[
           *#dict.jury* #linebreak()
           #for prof in jury {
-            [#prof #linebreak()]
+            if prof.link != none {
+              link(prof.link, prof.name)
+            } else {
+              prof.name
+            }
+
+            linebreak()
           }
         ]
       }
